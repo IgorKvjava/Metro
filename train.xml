@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tns:train xmlns:tns="http://www.kts.zu/Tariffs">
+<tns:name>train-0</tns:name>
+<tns:carriages>
+<tns:depoWagon>
+<tns:name>wagon-0</tns:name>
+<tns:type>true</tns:type>
+</tns:depoWagon>
+<tns:depoWagon>
+<tns:name>wagon-1</tns:name>
+<tns:type>true</tns:type>
+</tns:depoWagon>
+<tns:depoWagon>
+<tns:name>wagon-2</tns:name>
+<tns:type>false</tns:type>
+</tns:depoWagon>
+<tns:depoWagon>
+<tns:name>wagon-3</tns:name>
+<tns:type>false</tns:type>
+</tns:depoWagon>
+<tns:depoWagon>
+<tns:name>wagon-4</tns:name>
+<tns:type>true</tns:type>
+</tns:depoWagon>
+</tns:carriages>
+<tns:metroDriver>
+<tns:skill>52.04273149184651</tns:skill>
+<tns:name>Driver-12</tns:name>
+</tns:metroDriver>
+</tns:train>
