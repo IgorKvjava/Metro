@@ -1,7 +1,6 @@
 package ua.metroline;
 
 import ua.depo.Train;
-
 import java.util.LinkedList;
 
 /**

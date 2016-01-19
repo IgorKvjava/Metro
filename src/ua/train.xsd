@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://univerpulse.com.ua/Tariffs"
+        targetNamespace="http://univerpulse.com.ua/Tariffs"
+>
+    <element name="train">
+        <complexType>
+            <sequence>
+                <element name="name" type="string" minOccurs="1" maxOccurs="unbounded" />
+                <element name="carriages" type="tns:carriages" minOccurs="1" maxOccurs="unbounded" />
+                <element name="metroDriver" type="tns:metroDriver" minOccurs="1" maxOccurs="unbounded" />
+            </sequence>
+        </complexType>
+        <complexType name="carriages">
+            <sequence>
+                <element name="name" type="string" minOccurs="1" maxOccurs="1"/>
+                <element name="operatorname" type="string" minOccurs="1" maxOccurs="1" />
+                <element name="payroll" type="decimal" minOccurs="0" maxOccurs="1"/>
+                <element name="callprices" type="tns:callprices"  minOccurs="0" maxOccurs="1"/>
+                <element name="smsprice" type="decimal" minOccurs="0" maxOccurs="1"/>
+                <element name="parameters" type="tns:parameters"  minOccurs="0" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>

@@ -3,8 +3,10 @@ package ua.start;
 import ua.depo.DepoWagon;
 import ua.depo.Train;
 import ua.driver.MetroDriver;
+import ua.metroline.Escalator;
 import ua.metroline.MetroLine;
 import ua.metroline.MetroStation;
+import ua.passengers.Passenger;
 
 import java.util.*;
 
@@ -17,6 +19,10 @@ public class Builder {
     LinkedList<Train> trains = new LinkedList<>();
     PriorityQueue<MetroDriver> metroDriverPriorityQueue;
     LinkedList<MetroLine> metroLines=new LinkedList<>();
+    LinkedList<Passenger> passengersOnVestibule=new LinkedList<>();
+    LinkedList<Passenger> passengersOnEscalator=new LinkedList<>();
+    LinkedList<Escalator> escalators=new LinkedList<>();
+
 
     String [] nameStations={"Red","Green","Blue"};
     //Completion Trains-------------------------------------------------------------------------------------------
@@ -69,7 +75,8 @@ public class Builder {
         this.metroDriverPriorityQueue=metroDriverPriorityQueue;
     }
     //Drivers distribute on trains and distribute metro lines -------------------------------------------------
-    public void builderMetroLine(int countTrainsLine, LinkedList<Train> trains,PriorityQueue<MetroDriver> metroDriverPriorityQueue){
+    public void builderMetroLine(int countTrainsLine, LinkedList<Train> trains,
+                                 PriorityQueue<MetroDriver> metroDriverPriorityQueue){
         LinkedList<MetroLine> metroLines=new LinkedList<>();
         Iterator<Train> trainIterator=trains.iterator();
         int countMetroDrivers=metroDriverPriorityQueue.size();
@@ -107,10 +114,51 @@ public class Builder {
         //System.out.println(metroDriverPriorityQueue);
     }
 
-    public void passengerOnStation(){
+    public void passengerGoVestibule(){
+        Thread threadPassenger = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String name ="passenger - ";
+                int cuont =0;
+                while (true){
+                    Passenger passenger=new Passenger(name+cuont);
+                    cuont++;
+                    passengersOnVestibule.add(passenger);
+                    if (passengersOnVestibule.size()>0)
+                    System.out.println(" pas on Vestibule "+passengersOnVestibule.getLast());
+                    metroLines.get(0).getMetroStations().get(0).setPassengersOnVestibule(passengersOnVestibule);
+                    try {
+                        Thread.sleep(700);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        threadPassenger.start();
+    }
+
+    public void passengerGoEscalator(int i) throws InterruptedException {
+        String name="escalator "+i;
+        Escalator escalator=new Escalator(name);
+        escalators.add(escalator);
+        Thread threadPassenger = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                        escalator.sinhronizedThreade(metroLines,passengersOnEscalator,escalators,i);
+                }
+            }
+        });
+
+        Thread.sleep(3333);
+        threadPassenger.start();
 
     }
     public void trainOnStation(){
 
     }
+
+
 }
+

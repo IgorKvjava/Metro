@@ -1,10 +1,12 @@
 package ua.start;
 
+import java.io.IOException;
+
 /**
  * Created by univer3 on 12/12/2015.
  */
 public class Start {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Builder builder=new Builder();
         //Completion Trains-------------------------------------------------------------
         builder.builderTrains();
@@ -19,17 +21,14 @@ public class Start {
         System.out.println("metroDriverPriorityQueue "+builder.metroDriverPriorityQueue+"\n" +
                 "----------------------------------------------------------------------------------");
 
-        builder.builderMetroLine(6,builder.trains,builder.metroDriverPriorityQueue);
-        System.out.println(" Metro Line-"+builder.metroLines+"\n" +
-                "----------------------------------------------------------------------------------");
 
-        System.out.println("metroDriverPriorityQueue "+builder.metroDriverPriorityQueue+"\n" +
-                "----------------------------------------------------------------------------------");
-        builder.builderMetroLine(4,builder.trains,builder.metroDriverPriorityQueue);
-        System.out.println(" Metro Line-"+builder.metroLines+"\n" +
-                "----------------------------------------------------------------------------------");
+       builder.passengerGoVestibule();
+        builder.passengerGoEscalator(0);
+        builder.passengerGoEscalator(1);
+        builder.passengerGoEscalator(2);
 
-        System.out.println("metroDriverPriorityQueue "+builder.metroDriverPriorityQueue);
+
+
 
 
     }
