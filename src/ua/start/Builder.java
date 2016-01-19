@@ -114,6 +114,7 @@ public class Builder {
         //System.out.println(metroDriverPriorityQueue);
     }
 
+    //passengers go to Vestibule
     public void passengerGoVestibule(){
         Thread threadPassenger = new Thread(new Runnable() {
             @Override
@@ -138,6 +139,7 @@ public class Builder {
         threadPassenger.start();
     }
 
+    //passengers go to Escalator
     public void passengerGoEscalator(int i) throws InterruptedException {
         String name="escalator "+i;
         Escalator escalator=new Escalator(name);
