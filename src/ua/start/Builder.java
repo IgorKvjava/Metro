@@ -167,29 +167,24 @@ public class Builder {
             @Override
             public void run() {
                 while (true){
-                    synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers()) {
-                        if (!metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().isEmpty()) {
-                            passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().poll());
-                            trainOnLine.getCarriages().get(0).setPassengers(passengersOnTrain);
-                            System.out.println("passengers On Train from 0 Escalator " + passengersOnTrain.getLast()+
-                                    " "+trainOnLine.getCarriages().get(0).getPassengers().getLast());
-                        }
-                    }
 
-                        if (!metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers().isEmpty()) {
-                            synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers()) {
-                                passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers().poll());
+                        if (!metroLines.get(0).getMetroStations().get(0).getPassengers().isEmpty()) {
+                            synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers()) {
+                                passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().poll());
                                 trainOnLine.getCarriages().get(0).setPassengers(passengersOnTrain);
-                                System.out.println("passengers On Train from 1 Escalator " + passengersOnTrain.getLast()+
-                                        " "+trainOnLine.getCarriages().get(0).getPassengers().getLast());
+                                System.out.println("passengers On Train from Station --0 " + passengersOnTrain.getLast() +
+                                        " " + trainOnLine.getCarriages().get(0).getPassengers().getLast());
                             }
                         }
+                    else {
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                 }
 
             }

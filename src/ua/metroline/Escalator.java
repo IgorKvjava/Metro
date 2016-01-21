@@ -46,6 +46,7 @@ public class Escalator {
             if (!metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().isEmpty()) {
                 passengersOnEscalator.add(metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().poll());
                 escalators.get(i).setPassengers(passengersOnEscalator);
+                metroLines.get(0).getMetroStations().get(0).setPassengers(escalators.get(i).getPassengers());
                 System.out.println("passengers on escalator ::: " + i + " " + passengersOnEscalator.getLast());
                 try {
                     Thread.sleep(300);
