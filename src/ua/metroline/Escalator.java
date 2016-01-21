@@ -47,7 +47,9 @@ public class Escalator {
                 passengersOnEscalator.add(metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().poll());
                 escalators.get(i).setPassengers(passengersOnEscalator);
                 metroLines.get(0).getMetroStations().get(0).setPassengers(escalators.get(i).getPassengers());
-                System.out.println("passengers on escalator ::: " + i + " " + passengersOnEscalator.getLast());
+                //escalators.get(i).getPassengers().clear();
+                System.out.println("passengers on escalator ::: " + i + " "
+                        +  metroLines.get(0).getMetroStations().get(0).getPassengers().getLast());
                 try {
                     Thread.sleep(300);
                 } catch (InterruptedException e) {

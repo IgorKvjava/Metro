@@ -166,14 +166,25 @@ public class Builder {
         Thread threadTrains =new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true){
-
+                int numberWagon=0;
+                boolean b=true;
+                while (b){
                         if (!metroLines.get(0).getMetroStations().get(0).getPassengers().isEmpty()) {
-                            synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers()) {
-                                passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().poll());
-                                trainOnLine.getCarriages().get(0).setPassengers(passengersOnTrain);
-                                System.out.println("passengers On Train from Station --0 " + passengersOnTrain.getLast() +
-                                        " " + trainOnLine.getCarriages().get(0).getPassengers().getLast());
+                            synchronized (metroLines.get(0).getMetroStations().get(0).getPassengers()) {
+                                passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getPassengers().poll());
+                                trainOnLine.getCarriages().get(numberWagon).setPassengers(passengersOnTrain);
+                                if (trainOnLine.getCarriages().get(numberWagon).getPassengers().size()>60)
+                                    ++numberWagon;
+                                if(numberWagon>5) {System.out.println("Train "+trainOnLine.getName()+" full");
+                                    b=false;}
+                                System.out.println("passengers On Train from Station --0 "
+                                        + trainOnLine.getCarriages().get(0).getPassengers().getLast()
+                                        +" wagon number "+numberWagon);
+                            }
+                            try {
+                                Thread.sleep(400);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
                     else {
