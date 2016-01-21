@@ -26,6 +26,8 @@ public class Start {
         builder.passengerGoEscalator(0);
         builder.passengerGoEscalator(1);
         builder.passengerGoEscalator(2);
+        builder.trainOnStation();
+
 
 
 

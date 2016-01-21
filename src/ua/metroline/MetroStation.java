@@ -11,7 +11,7 @@ public class MetroStation {
     private String name;
     private LinkedList<Passenger> passengers;
     private LinkedList<Passenger> passengersOnVestibule;
-    Escalator escalator;
+    LinkedList<Escalator> escalators;
 
     public MetroStation(String name) {
         this.name = name;
@@ -38,12 +38,12 @@ public class MetroStation {
         this.passengers = passengers;
     }
 
-    public Escalator getEscalator() {
-        return escalator;
+    public LinkedList<Escalator> getEscalators() {
+        return escalators;
     }
 
-    public void setEscalator(Escalator escalator) {
-        this.escalator = escalator;
+    public void setEscalators(LinkedList<Escalator> escalators) {
+        this.escalators = escalators;
     }
 
     public String getName() {

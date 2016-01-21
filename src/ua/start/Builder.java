@@ -21,6 +21,7 @@ public class Builder {
     LinkedList<MetroLine> metroLines=new LinkedList<>();
     LinkedList<Passenger> passengersOnVestibule=new LinkedList<>();
     LinkedList<Passenger> passengersOnEscalator=new LinkedList<>();
+    LinkedList<Passenger> passengersOnTrain=new LinkedList<>();
     LinkedList<Escalator> escalators=new LinkedList<>();
 
 
@@ -56,7 +57,7 @@ public class Builder {
             trains.add(train1);
         }
     }
-    //CCompletion metro driver-------------------------------------------------------------------------------------
+    //Completion metro driver-------------------------------------------------------------------------------------
     public void builderMetroDrivers (){
         //comparison of skills Driver
         Comparator<MetroDriver> metroDriverComparator=new Comparator<MetroDriver>() {
@@ -144,6 +145,7 @@ public class Builder {
         String name="escalator "+i;
         Escalator escalator=new Escalator(name);
         escalators.add(escalator);
+        metroLines.get(0).getMetroStations().get(0).setEscalators(escalators);
         Thread threadPassenger = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -152,12 +154,48 @@ public class Builder {
                 }
             }
         });
-
         Thread.sleep(3333);
         threadPassenger.start();
-
     }
+
+    //
     public void trainOnStation(){
+        Iterator<Train> trainIteratorOnLine=metroLines.get(0).getTrainsOnLine().iterator();
+        Train trainOnLine=trainIteratorOnLine.next();
+        int numberEscalator=0;
+        Thread threadTrains =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+                    synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers()) {
+                        if (!metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().isEmpty()) {
+                            passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(0).getPassengers().poll());
+                            trainOnLine.getCarriages().get(0).setPassengers(passengersOnTrain);
+                            System.out.println("passengers On Train from 0 Escalator " + passengersOnTrain.getLast()+
+                                    " "+trainOnLine.getCarriages().get(0).getPassengers().getLast());
+                        }
+                    }
+
+                        if (!metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers().isEmpty()) {
+                            synchronized (metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers()) {
+                                passengersOnTrain.add(metroLines.get(0).getMetroStations().get(0).getEscalators().get(1).getPassengers().poll());
+                                trainOnLine.getCarriages().get(0).setPassengers(passengersOnTrain);
+                                System.out.println("passengers On Train from 1 Escalator " + passengersOnTrain.getLast()+
+                                        " "+trainOnLine.getCarriages().get(0).getPassengers().getLast());
+                            }
+                        }
+
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
+        threadTrains.start();
+
 
     }
 

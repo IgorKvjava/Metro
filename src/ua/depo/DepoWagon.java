@@ -1,11 +1,16 @@
 package ua.depo;
 
+import ua.passengers.Passenger;
+
+import java.util.LinkedList;
+
 /**
  * Created by univer3 on 12/12/2015.
  */
 public class DepoWagon {
     private String nameWagon;
     private boolean typeWagon;
+    private LinkedList<Passenger> passengers;
 
     public DepoWagon(String nameWagon, boolean mainVagon) {
         this.nameWagon = nameWagon;
@@ -13,6 +18,14 @@ public class DepoWagon {
     }
 
     public DepoWagon() {
+    }
+
+    public LinkedList<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(LinkedList<Passenger> passengers) {
+        this.passengers = passengers;
     }
 
     public String getNameWagon() {

@@ -32,8 +32,14 @@ public class Escalator {
         return passengers;
     }
 
+    public void setPassengers (LinkedList < Passenger > passengers) {
 
 
+        this.passengers = passengers;
+
+    }
+
+    //sinhronized thread Passengers on Escalator
     public void sinhronizedThreade(LinkedList<MetroLine> metroLines,LinkedList<Passenger> passengersOnEscalator,
                                   LinkedList<Escalator> escalators,int i) {
         synchronized (metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule()) {
@@ -55,12 +61,6 @@ public class Escalator {
                 }
             }
         }
-    }
-        public void setPassengers (LinkedList < Passenger > passengers) {
-
-
-                this.passengers = passengers;
-
     }
 
 }
