@@ -1,5 +1,6 @@
 package ua.metroline;
 
+import ua.depo.DepoWagon;
 import ua.passengers.Passenger;
 
 import java.util.LinkedList;
@@ -15,6 +16,30 @@ public class MetroStation {
 
     public MetroStation(String name) {
         this.name = name;
+        passengers = new LinkedList<>();
+    }
+
+    //synchronized pass with station  go to wagon
+    public synchronized void PassOnWagon (DepoWagon depoWagon){
+        //if 0 pass proverit
+        System.out.println("Passengers size on station --------------"+passengers.size());
+        if (!passengers.isEmpty()) {
+            depoWagon.getPassengers().add(passengers.poll());
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
     @Override

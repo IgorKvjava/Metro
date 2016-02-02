@@ -12,13 +12,10 @@ public class Escalator {
 
 
     public Escalator(String name) {
+        passengers=new LinkedList<>();
         this.name = name;
     }
 
-    public Escalator(String name, LinkedList<Passenger> passengers) {
-        this.name = name;
-        this.passengers = passengers;
-    }
 
     public String getName() {
         return name;
@@ -40,21 +37,23 @@ public class Escalator {
     }
 
     //sinhronized thread Passengers on Escalator
-    public void sinhronizedThreade(LinkedList<MetroLine> metroLines,LinkedList<Passenger> passengersOnEscalator,
-                                  LinkedList<Escalator> escalators,int i) {
+    public void sinhronizedThreade(LinkedList<MetroLine> metroLines, Escalator  escalator ) {
         synchronized (metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule()) {
             if (!metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().isEmpty()) {
-                passengersOnEscalator.add(metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().poll());
-                escalators.get(i).setPassengers(passengersOnEscalator);
-                metroLines.get(0).getMetroStations().get(0).setPassengers(escalators.get(i).getPassengers());
-                //escalators.get(i).getPassengers().clear();
-                System.out.println("passengers on escalator ::: " + i + " "
-                        +  metroLines.get(0).getMetroStations().get(0).getPassengers().getLast());
+                Passenger pas = metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().poll();
+                escalator.getPassengers().add(pas);
+                //sleep
                 try {
                     Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+//                escalators.get(i).setPassengers(passengersOnEscalator);
+                metroLines.get(0).getMetroStations().get(0).getPassengers().add( escalator.getPassengers().poll());
+                //escalators.get(i).getPassengers().clear();
+                System.out.println("on escalator ::: " + escalator.name + " passengers "
+                        +  pas);
+
             }
             else {
                 try {

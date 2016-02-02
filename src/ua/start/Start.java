@@ -26,7 +26,10 @@ public class Start {
         builder.passengerGoEscalator(0);
         builder.passengerGoEscalator(1);
         builder.passengerGoEscalator(2);
-        builder.trainOnStation();
+        //train On Station
+        builder.trainOnStation(builder.metroLines.get(0).getMetroStations().get(0)
+                ,builder.metroLines.get(0).getTrainsOnLine().get(0));
+
 
 
 

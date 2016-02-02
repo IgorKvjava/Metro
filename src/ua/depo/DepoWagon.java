@@ -15,6 +15,7 @@ public class DepoWagon {
     public DepoWagon(String nameWagon, boolean mainVagon) {
         this.nameWagon = nameWagon;
         this.typeWagon = mainVagon;
+        this.passengers=new LinkedList<>();
     }
 
     public DepoWagon() {
