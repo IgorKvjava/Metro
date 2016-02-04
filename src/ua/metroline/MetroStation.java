@@ -17,6 +17,7 @@ public class MetroStation {
     public MetroStation(String name) {
         this.name = name;
         passengers = new LinkedList<>();
+        passengersOnVestibule=new LinkedList<>();
     }
 
     //synchronized pass with station  go to wagon

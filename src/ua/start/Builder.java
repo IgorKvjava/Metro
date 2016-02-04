@@ -21,11 +21,9 @@ public class Builder {
     PriorityQueue<MetroDriver> metroDriverPriorityQueue;
     LinkedList<MetroLine> metroLines = new LinkedList<>();
     //LinkedList<Passenger> passengersOnVestibule = new LinkedList<>();
-    LinkedList<Passenger> passengersOnEscalator = new LinkedList<>();
-    LinkedList<Passenger> passengersOnTrain = new LinkedList<>();
+    //LinkedList<Passenger> passengersOnEscalator = new LinkedList<>();
+    //LinkedList<Passenger> passengersOnTrain = new LinkedList<>();
     LinkedList<Escalator> escalators = new LinkedList<>();
-
-
     String[] nameStations = {"Red", "Green", "Blue"};
 
     //Completion Trains-------------------------------------------------------------------------------------------
@@ -128,19 +126,21 @@ public class Builder {
         Thread threadPassenger = new Thread(new Runnable() {
             @Override
             public void run() {
+                LinkedList<Passenger> passengersOnVestibule = new LinkedList<>();
                 String name = "passenger - ";
                 int cuont = 0;
                 while (true) {
                     Passenger passenger = new Passenger(name + cuont);
                     cuont++;
                     passengersOnVestibule.add(passenger);
-                    if (passengersOnVestibule.size() > 0)
+                    if (passengersOnVestibule.size() > 0) {
                         System.out.println(" pas on Vestibule " + passengersOnVestibule.getLast());
-                    metroLines.get(0).getMetroStations().get(0).setPassengersOnVestibule(passengersOnVestibule);
+                        metroLines.get(0).getMetroStations().get(0).getPassengersOnVestibule().add(passengersOnVestibule.poll());
+                    }
                     try {
                         Thread.sleep(700);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+
                     }
                 }
             }
